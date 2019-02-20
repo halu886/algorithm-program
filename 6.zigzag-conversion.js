@@ -51,16 +51,17 @@
  */
 var convert = function (s, numRows) {
     const doubleArray = []
-    for (let i = 0; i < numRows; i++) {
+    for (let i = 0; i < s.length; i++) {
         doubleArray.push([])
     }
-    let tempI = 0;
-    let tempJ = 0;
+    let tempI = 0;// 横轴
+    let tempJ = 0;// 纵轴
     let isStraight = true;
+    let resultStr = "";
     for (const char of s) {
-        doubleArray[temI][tempJ] = char;
+        doubleArray[tempI][tempJ] = char;
         if (isStraight) {
-            if (tempJ < numRows) {
+            if (tempJ < numRows - 1) {
                 ++tempJ;
                 continue;
             }
@@ -69,7 +70,23 @@ var convert = function (s, numRows) {
             --tempJ;
             continue;
         } else {
-            if ()
+            if (!tempJ) {
+                ++tempJ;
+                continue;
+            }
+            isStraight = true;
+            ++tempI;
+            --tempJ;
         }
     }
+
+    for (let i = 0; i < doubleArray.length; i++) {
+        const arrY = doubleArray[i];
+        for (let j = 0; j < arrY.length; j++) {
+            if (arrY[j]) {
+                resultStr += arrY[j]
+            }
+        }
+    }
+    return resultStr;
 };
