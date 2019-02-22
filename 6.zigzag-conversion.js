@@ -50,6 +50,7 @@
  * @return {string}
  */
 var convert = function (s, numRows) {
+    if (numRows === 1) return s;
     const doubleArray = []
     for (let i = 0; i < s.length; i++) {
         doubleArray.push([])
@@ -60,7 +61,7 @@ var convert = function (s, numRows) {
     let resultStr = "";
     for (const char of s) {
         doubleArray[tempI][tempJ] = char;
-        console.log(doubleArray, tempI, tempJ)
+        // console.log(doubleArray, tempI, tempJ)
         if (isStraight) {
             if (tempJ < numRows - 1) {
                 ++tempJ;
@@ -72,10 +73,10 @@ var convert = function (s, numRows) {
             continue;
         } else {
             if (!tempJ) {
+                isStraight = true;
                 ++tempJ;
                 continue;
             }
-            isStraight = true;
             ++tempI;
             --tempJ;
         }
