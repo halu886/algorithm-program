@@ -41,6 +41,13 @@
  * @return {number}
  */
 var reverse = function (x) {
-    const buffer = new ArrayBuffer(4);
+    let result = 0;
+    const isPositive = x >= 0;
+    while (x !== 0) {
+        const v = x % 10;
+        x = parseInt(x / 10);
 
+        result = result * 10 + v;
+    }
+    return result * Number(isPositive);
 };
