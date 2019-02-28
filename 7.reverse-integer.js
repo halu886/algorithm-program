@@ -42,12 +42,12 @@
  */
 var reverse = function (x) {
     let result = 0;
-    const isPositive = x >= 0;
     while (x !== 0) {
         const v = x % 10;
         x = parseInt(x / 10);
-
+        if ((result * 10 + x) > 2 ** 31 || (result * 10 + x) < -(2 ** 31))
+            return 0;
         result = result * 10 + v;
     }
-    return result * Number(isPositive);
+    return result;
 };
