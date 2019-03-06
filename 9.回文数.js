@@ -43,15 +43,15 @@
  * @return {boolean}
  */
 var isPalindrome = function (x) {
-    if (x <= 0) {
-        return true;
+    if (x < 0) {
+        return false;
     }
     let reversalInt = 0;
     let tempX = x;
     while (tempX) {
         const temp = tempX % 10;
-        tempX = Number(tempX / 10);
-        reversalInt += reversalInt * 10 + temp;
+        tempX = parseInt(tempX / 10);
+        reversalInt = reversalInt * 10 + temp;
     }
     return x === reversalInt;
 };
