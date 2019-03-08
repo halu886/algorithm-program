@@ -77,17 +77,23 @@
  */
 var isMatch = function (s, p) {
     let index = 0;
+    let isWordMatch = 0;
     for (const charS of s) {
         const regexChar = p[index]
-        if (regexChar === ".") {
+        if (regexChar == "*") {
 
+            --index;
+            continue
+        }
+        if (regexChar === ".") {
             continue;
         }
         if (regexChar === charS) {
             ++index;
-            return;
+            continue;
         }
-
+        return false
     }
+    return true;
 };
 
