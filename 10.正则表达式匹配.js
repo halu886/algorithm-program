@@ -77,7 +77,7 @@
  */
 var isMatch = function (s, p) {
     let index = 0;
-    let isWordMatch = 0;
+    let stars = [];
     for (const charS of s) {
         const regexChar = p[index]
         if (regexChar == "*") {
