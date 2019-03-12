@@ -78,21 +78,26 @@
 var isMatch = function (s, p) {
     let index = 0;
     let stars = [];
-    for (const charS of s) {
+    let indexS = 0;
+    while (indexS < 0 || indexS > s.length) {
+        const charS = s[indexS];
         const regexChar = p[index]
         if (regexChar == "*") {
-
-            --index;
+            stars.push(index - 1);
+            ++index;
             continue
         }
         if (regexChar === ".") {
+            ++index
+            ++indexS
             continue;
         }
         if (regexChar === charS) {
             ++index;
+            ++indexS;
             continue;
         }
-        return false
+
     }
     return true;
 };
