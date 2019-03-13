@@ -83,8 +83,17 @@ var isMatch = function (s, p) {
         const charS = s[indexS];
         const regexChar = p[index]
         if (regexChar == "*") {
-            stars.push(index - 1);
-            ++index;
+            const starEnd = stars[stars.length - 1];
+            if (!starEnd || (starEnd && starEnd.index != index)) {
+                stars.push({ index, passCount=1, waitPassCount = 0, indexS })
+                ++index;
+                continue
+            }
+
+            if (!starEnd.waitPassCount) {
+                --starEnd.waitPassCount;
+                --index;
+            }
             continue
         }
         if (regexChar === ".") {
@@ -97,7 +106,12 @@ var isMatch = function (s, p) {
             ++indexS;
             continue;
         }
-
+        if (!stars.length) {
+            const starEnd = stars[stars.length - 1];
+            index = starEnd.index - 1;
+            index
+        }
+        return false
     }
     return true;
 };
