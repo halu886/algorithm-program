@@ -85,11 +85,10 @@ var isMatch = function (s, p) {
         if (regexChar == "*") {
             const starEnd = stars[stars.length - 1];
             if (!starEnd || (starEnd && starEnd.index != index)) {
-                stars.push({ index, passCount=1, waitPassCount = 0, indexS })
+                stars.push({ index, passCount=0, waitPassCount = 0, indexS, isAdd: true })
                 ++index;
                 continue
             }
-
             if (!starEnd.waitPassCount) {
                 --starEnd.waitPassCount;
                 --index;
@@ -106,10 +105,12 @@ var isMatch = function (s, p) {
             ++indexS;
             continue;
         }
+        //重试时匹配失败
         if (!stars.length) {
-            const starEnd = stars[stars.length - 1];
+            ++starEnd.passCount;
+            starEnd.waitPassCount = starEnd.passCount;
             index = starEnd.index - 1;
-            index
+            indexS = starEnd.indexS;
         }
         return false
     }
