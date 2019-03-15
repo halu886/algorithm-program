@@ -79,19 +79,23 @@ var isMatch = function (s, p) {
     let index = 0;
     let stars = [];
     let indexS = 0;
-    while (indexS < 0 || indexS > s.length) {
+    let isStar = false;
+    while (indexS >= 0 && indexS < s.length) {
         const charS = s[indexS];
         const regexChar = p[index]
         if (regexChar == "*") {
             const starEnd = stars[stars.length - 1];
             if (!starEnd || (starEnd && starEnd.index != index)) {
-                stars.push({ index, passCount=0, waitPassCount = 0, indexS, isAdd: true })
+                stars.push({ index, passCount: 0, waitPassCount: 0, indexS })
                 ++index;
                 continue
             }
             if (!starEnd.waitPassCount) {
-                --starEnd.waitPassCount;
-                --index;
+                --index
+                ++indexS;
+            } else {
+                ++index;
+                isStar = false;
             }
             continue
         }
@@ -105,15 +109,40 @@ var isMatch = function (s, p) {
             ++indexS;
             continue;
         }
-        //重试时匹配失败
-        if (!stars.length) {
-            ++starEnd.passCount;
-            starEnd.waitPassCount = starEnd.passCount;
-            index = starEnd.index - 1;
-            indexS = starEnd.indexS;
+        if (isStar) {
+            stars.pop()
+            if (stars.length) {
+                const starEnd = stars[stars.length - 1];
+                ++starEnd.passCount;
+                starEnd.waitPassCount = starEnd.passCount;
+                index = starEnd.index - 1;
+                indexS = starEnd.indexS;
+                isStar = true;
+                continue;
+            } else {
+                index = -1;
+                indexS = -1;
+            }
+        } else {
+            if (stars.length) {
+                const starEnd = stars[stars.length - 1];
+                ++starEnd.passCount;
+                starEnd.waitPassCount = starEnd.passCount;
+                index = starEnd.index - 1;
+                indexS = starEnd.indexS;
+                isStar = true;
+                continue;
+            } else {
+                index = -1;
+                indexS = -1;
+            }
         }
-        return false
     }
-    return true;
+    if (indexS === s.length) {
+        if (index == p.length || (index === p.length - 1 && p[p.length - 1] === "*")) {
+            return true
+        }
+    }
+    return false;
 };
 
