@@ -83,31 +83,31 @@ var isMatch = function (s, p) {
     while (indexS >= 0 && indexS < s.length) {
         const charS = s[indexS];
         const regexChar = p[index]
-        console.log(index, indexS)
         if (regexChar == "*") {
             const starEnd = stars[stars.length - 1];
-            if (!starEnd || (starEnd && starEnd.index != index)) {
+            if (!starEnd || (starEnd && starEnd.index !== index)) {
                 stars.push({ index, passCount: 0, waitPassCount: 0, indexS })
                 ++index;
                 continue
             }
+            if (isStar) {
+                --starEnd.waitPassCount
+            }
             if (!starEnd.waitPassCount) {
-                --index
-                ++indexS;
-            } else {
                 ++index;
                 isStar = false;
+            } else {
+                --index;
             }
             continue
         } else if (p[index + 1] === "*") {
-            const starEnd = stars[stars.length];
-            if (!starEnd || (starEnd && starEnd.index != index)) {
-                stars.push({ index, passCount: 0, waitPassCount: 0, indexS })
+            const starEnd = stars[stars.length - 1];
+            if (!starEnd || (starEnd && starEnd.index != (index + 1))) {
+                stars.push({ index: index + 1, passCount: 0, waitPassCount: 0, indexS })
                 ++index;
                 continue
             }
         }
-        console.log("pass")
         if (regexChar === ".") {
             ++index
             ++indexS
@@ -135,7 +135,7 @@ var isMatch = function (s, p) {
         } else {
             if (stars.length) {
                 const starEnd = stars[stars.length - 1];
-                ++starEnd.passCount;
+                starEnd.passCount = starEnd.passCount + 1;
                 starEnd.waitPassCount = starEnd.passCount;
                 index = starEnd.index - 1;
                 indexS = starEnd.indexS;
