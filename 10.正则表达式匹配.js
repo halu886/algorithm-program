@@ -148,9 +148,19 @@ var isMatch = function (s, p) {
         }
     }
     if (indexS === s.length) {
-        if (index == p.length || (index === p.length - 1 && p[p.length - 1] === "*")) {
-            return true
+        while (index < p.length) {
+            const charP = p[index];
+            if (charP === "*") {
+                ++index;
+                continue;
+            }
+            if (p[index + 1] === "*") {
+                index += 2;
+                continue
+            }
+            return false
         }
+        return true
     }
     return false;
 };
