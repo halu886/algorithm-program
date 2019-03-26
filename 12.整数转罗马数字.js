@@ -71,31 +71,31 @@
  */
 var intToRoman = function (num) {
     let s = ""
-    if (num > 1000) {
-        s += "M".repeat(num / 1000)
+    if (num >= 1000) {
+        s += "M".repeat(parseInt(num / 1000))
         num = num % 1000
     }
-    if (num > 500 && num / 100 !== 9) {
-        s += "D".repeat(num / 500)
+    if (num >= 500 && parseInt(num / 100) !== 9) {
+        s += "D".repeat(parseInt(num / 500))
         num = num % 500
     }
-    if (num > 100) {
-        const cCount = num / 100;
+    if (num >= 100) {
+        const cCount = parseInt(num / 100);
         if (cCount === 4) {
             s += "CD";
         } else if (cCount === 9) {
             s += "CM";
         } else {
-            s += "D".repeat(cCount)
+            s += "C".repeat(cCount)
         }
         num = num % 100;
     }
-    if (num > 50 && num / 10 !== 9) {
-        s += "L".repeat(num / 50);
+    if (num >= 50 && parseInt(num / 10) !== 9) {
+        s += "L".repeat(parseInt(num / 50));
         num = num % 50;
     }
-    if (num > 10) {
-        const xCount = num / 10;
+    if (num >= 10) {
+        const xCount = parseInt(num / 10);
         if (xCount === 4) {
             s += "XL";
         } else if (xCount === 9) {
@@ -105,12 +105,12 @@ var intToRoman = function (num) {
         }
         num = num % 10;
     }
-    if (num > 5 && num / 1 !== 9) {
-        s += "V".repeat(num / 5);
+    if (num >= 5 && parseInt(num / 1) !== 9) {
+        s += "V".repeat(parseInt(num / 5));
         num = num % 5;
     }
-    if (num > 1) {
-        const xCount = num / 1;
+    if (num >= 1) {
+        const xCount = parseInt(num / 1);
         if (xCount === 4) {
             s += "IV";
         } else if (xCount === 9) {
