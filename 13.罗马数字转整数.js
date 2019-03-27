@@ -70,6 +70,34 @@
  * @return {number}
  */
 var romanToInt = function (s) {
-
+    let c = 0;
+    let index = -1;
+    if (index = ~s.indexOf("CM")) {
+        c += 900
+        s = s.substr(index * -1 - 1, 2);
+    }
+    if (~s.indexOf("M")) {
+        const matchLength = s.match(/(M*)/)[0].length
+        c += 1000 * matchLength;
+        s = s.substr(0, matchLength)
+    }
+    if (index = ~s.indexOf("CD")) {
+        c += 400
+        s = s.substr(index * -1 - 1, 2);
+    }
+    if (~s.indexOf("D")) {
+        const matchLength = s.match(/(D*)/)[0].length
+        c += 500 * matchLength;
+        s = s.substr(0, 1)
+    }
+    if (index = ~s.indexOf("XC")) {
+        c += 90
+        s = s.substr(index * -1 - 1, 2);
+    }
+    if (~s.indexOf("C")) {
+        const matchLength = s.match(/(C*)/)[0].length
+        c += 100 * matchLength;
+        s = s.substr(0, 1)
+    }
 };
 
