@@ -74,30 +74,63 @@ var romanToInt = function (s) {
     let index = -1;
     if (index = ~s.indexOf("CM")) {
         c += 900
-        s = s.substr(index * -1 - 1, 2);
+        s = s.replace("CM", "");
     }
     if (~s.indexOf("M")) {
         const matchLength = s.match(/(M*)/)[0].length
         c += 1000 * matchLength;
-        s = s.substr(0, matchLength)
+        s = s.substr(matchLength)
     }
     if (index = ~s.indexOf("CD")) {
         c += 400
-        s = s.substr(index * -1 - 1, 2);
+        s = s.replace("CD", "");
     }
     if (~s.indexOf("D")) {
         const matchLength = s.match(/(D*)/)[0].length
         c += 500 * matchLength;
-        s = s.substr(0, 1)
+        s = s.substr(matchLength)
     }
     if (index = ~s.indexOf("XC")) {
         c += 90
-        s = s.substr(index * -1 - 1, 2);
+        s = s.replace("XC", "");
     }
     if (~s.indexOf("C")) {
         const matchLength = s.match(/(C*)/)[0].length
         c += 100 * matchLength;
-        s = s.substr(0, 1)
+        s = s.substr(matchLength)
     }
+    if (index = ~s.indexOf("XL")) {
+        c += 40
+        s = s.replace("XL", "");
+    }
+    if (~s.indexOf("L")) {
+        const matchLength = s.match(/(L*)/)[0].length
+        c += 50 * matchLength;
+        s = s.substr(matchLength)
+    }
+    if (index = ~s.indexOf("IX")) {
+        c += 9
+        s = s.replace("IX", "");
+    }
+    if (~s.indexOf("X")) {
+        const matchLength = s.match(/(X*)/)[0].length
+        c += 10 * matchLength;
+        s = s.substr(matchLength)
+    }
+    if (index = ~s.indexOf("IV")) {
+        c += 4
+        s = s.replace("IV", "");
+    }
+    if (~s.indexOf("V")) {
+        const matchLength = s.match(/(V*)/)[0].length
+        c += 5 * matchLength;
+        s = s.substr(matchLength)
+    }
+    if (~s.indexOf("I")) {
+        const matchLength = s.match(/(I*)/)[0].length
+        c += 1 * matchLength;
+        s = s.substr(matchLength)
+    }
+    return c;
 };
 
