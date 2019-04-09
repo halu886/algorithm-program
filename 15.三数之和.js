@@ -40,14 +40,21 @@ var threeSum = function (nums) {
                 const numX = nums[x];
                 if (!(numI + numJ + numX)) {
                     let isExist = false;
+                    const arr = [numI, numJ, numX].sort();
                     for (const resultNum of resultNumArr) {
-                        if (~resultNum.indexOf(numI) && ~resultNum.indexOf(numJ) && ~resultNum.indexOf(numX)) {
+                        let equalNum = 0
+                        for (let x = 0; x < 3; x++) {
+                            if (resultNum[x] == arr[x]) {
+                                equalNum++;
+                            }
+                        }
+                        if (equalNum === 3) {
                             isExist = true
                             break;
                         }
                     }
                     if (!isExist) {
-                        resultNumArr.push([numI, numJ, numX].sort())
+                        resultNumArr.push(arr);
                     }
                 }
             }
