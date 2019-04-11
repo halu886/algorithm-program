@@ -32,29 +32,32 @@
  */
 var threeSum = function (nums) {
     const resultNumArr = [];
-    for (let i = 0; i < nums.length; i++) {
-        const numI = nums[i];
-        for (let j = i + 1; j < nums.length; j++) {
-            const numJ = nums[j];
-            for (let x = j + 1; x < nums.length; x++) {
-                const numX = nums[x];
-                if (!(numI + numJ + numX)) {
-                    let isExist = false;
-                    const arr = [numI, numJ, numX].sort();
-                    for (const resultNum of resultNumArr) {
-                        let equalNum = 0
-                        for (let x = 0; x < 3; x++) {
-                            if (resultNum[x] == arr[x]) {
-                                equalNum++;
+    for (let i = 0; i < nums.length - 2; i++) {
+        if (i == 0 || (i > 0 && nums[i] !== nums[i - 1])) {
+            const sum = 0 - nums[i]
+            let j = i + 1;
+            for (let j = i + 1; j < nums.length; j++) {
+                const numJ = nums[j];
+                for (let x = j + 1; x < nums.length; x++) {
+                    const numX = nums[x];
+                    if (!(numI + numJ + numX)) {
+                        let isExist = false;
+                        const arr = [numI, numJ, numX].sort();
+                        for (const resultNum of resultNumArr) {
+                            let equalNum = 0
+                            for (let x = 0; x < 3; x++) {
+                                if (resultNum[x] == arr[x]) {
+                                    equalNum++;
+                                }
+                            }
+                            if (equalNum === 3) {
+                                isExist = true
+                                break;
                             }
                         }
-                        if (equalNum === 3) {
-                            isExist = true
-                            break;
+                        if (!isExist) {
+                            resultNumArr.push(arr);
                         }
-                    }
-                    if (!isExist) {
-                        resultNumArr.push(arr);
                     }
                 }
             }
