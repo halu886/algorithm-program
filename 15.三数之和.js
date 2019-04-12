@@ -32,34 +32,27 @@
  */
 var threeSum = function (nums) {
     const resultNumArr = [];
+    nums = nums.sort((a, b) => { return (a - b) })
     for (let i = 0; i < nums.length - 2; i++) {
         if (i == 0 || (i > 0 && nums[i] !== nums[i - 1])) {
             const sum = 0 - nums[i]
             let j = i + 1;
-            for (let j = i + 1; j < nums.length; j++) {
-                const numJ = nums[j];
-                for (let x = j + 1; x < nums.length; x++) {
-                    const numX = nums[x];
-                    if (!(numI + numJ + numX)) {
-                        let isExist = false;
-                        const arr = [numI, numJ, numX].sort();
-                        for (const resultNum of resultNumArr) {
-                            let equalNum = 0
-                            for (let x = 0; x < 3; x++) {
-                                if (resultNum[x] == arr[x]) {
-                                    equalNum++;
-                                }
-                            }
-                            if (equalNum === 3) {
-                                isExist = true
-                                break;
-                            }
-                        }
-                        if (!isExist) {
-                            resultNumArr.push(arr);
-                        }
-                    }
+            let x = nums.length - 1;
+            while (j < x) {
+                if (nums[x] + nums[j] == sum) {
+                    resultNumArr.push([nums[i], nums[j], nums[x]])
+                    while (j < x && nums[j] === nums[j + 1]) { j++ }
+                    while (j < x && nums[x] === nums[x - 1]) { x-- }
+                    j++;
+                    x--;
+                } else if (nums[x] + nums[j] < sum) {
+                    while (j < x && nums[j] === nums[j + 1]) { j++ }
+                    j++;
+                } else {
+                    while (j < x && nums[x] === nums[x - 1]) { x-- }
+                    x--;
                 }
+
             }
         }
     }
