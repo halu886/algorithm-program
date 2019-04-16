@@ -26,11 +26,31 @@
  * @return {number}
  */
 var threeSumClosest = function (nums, target) {
-    const result = 0;
+    let result = nums[0] + nums[1] + nums[2];
     nums = nums.sort((x, y) => { return x - y; })
     for (let i = 0; i < nums.length - 2; i++) {
-        const numI = nums[i]
-        if (i === 0) { }
+        if (i == 0 || (i !== 0 && nums[i] !== nums[i + 1])) {
+            const numI = nums[i]
+            const sum = target - numI;
+            let j = i + 1;
+            let x = nums.length - 1;
+            while (j < x) {
+                const diffSum = sum - nums[j] - nums[x];
+                if (!diffSum) {
+                    return 0;
+                } else if (Math.abs(diffSum) < Math.abs(target - result)) {
+                    result = nums[i] + nums[j] + nums[x];
+                    while (j < x && nums[j] === nums[j + 1]) { j++ }
+                    while (j < x && nums[x] === nums[x - 1]) { x-- }
+                    j++;
+                } else {
+                    while (j < x && nums[j] === nums[j + 1]) { j++ }
+                    while (j < x && nums[x] === nums[x - 1]) { x-- }
+                    x--;
+                }
+            }
+        }
     }
+    return result
 };
 
