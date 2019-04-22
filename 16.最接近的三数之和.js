@@ -30,27 +30,23 @@ var threeSumClosest = function (nums, target) {
     //待定
     let result = nums[0] + nums[1] + nums[nums.length - 1];
     for (let i = 0; i < nums.length - 2; i++) {
-        if (i == 0 || (i !== 0 && nums[i] !== nums[i + 1])) {
-            const numI = nums[i]
-            const sum = target - numI;
-            let j = i + 1;
-            let x = nums.length - 1;
-            // console.log(nums);
-            while (j < x) {
-                const diffSum = sum - nums[j] - nums[x];
-                console.log(i, j, x, nums[i], nums[j], nums[x], Math.abs(diffSum), Math.abs(target - result))
-                if (!diffSum) {
-                    return target;
-                } else if ((Math.abs(diffSum) < Math.abs(target - result)) && diffSum >= 0) {
-                    result = nums[i] + nums[j] + nums[x];
-                    while (j < x && nums[j] === nums[j + 1]) { j++ }
-                    while (j < x && nums[x] === nums[x - 1]) { x-- }
-                    x--;
-                } else {
-                    while (j < x && nums[j] === nums[j + 1]) { j++ }
-                    while (j < x && nums[x] === nums[x - 1]) { x-- }
-                    j++;
-                }
+        const numI = nums[i]
+        const sum = target - numI;
+        let j = i + 1;
+        let x = nums.length - 1;
+        while (j < x) {
+            const diffSum = sum - nums[j] - nums[x];
+            if (Math.abs(diffSum) < Math.abs(target - result)) {
+                result = nums[i] + nums[j] + nums[x];
+            }
+            if (result === target) {
+                return target;
+            } else if (result > target) {
+                while (j < x && nums[x] === nums[x - 1]) { x-- }
+                x--;
+            } else {
+                while (j < x && nums[j] === nums[j + 1]) { j++ }
+                j++;
             }
         }
     }
