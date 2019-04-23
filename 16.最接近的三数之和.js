@@ -34,14 +34,17 @@ var threeSumClosest = function (nums, target) {
         const sum = target - numI;
         let j = i + 1;
         let x = nums.length - 1;
+        // console.log(nums);
         while (j < x) {
             const diffSum = sum - nums[j] - nums[x];
+            const tempSum = nums[i] + nums[j] + nums[x];
+            // console.log(i, j, x, nums[i], nums[j], nums[x], nums[i] + nums[j] + nums[x], result);
             if (Math.abs(diffSum) < Math.abs(target - result)) {
                 result = nums[i] + nums[j] + nums[x];
             }
             if (result === target) {
                 return target;
-            } else if (result > target) {
+            } else if (tempSum > target) {
                 while (j < x && nums[x] === nums[x - 1]) { x-- }
                 x--;
             } else {
