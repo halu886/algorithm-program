@@ -32,6 +32,30 @@
  * @return {string[]}
  */
 var letterCombinations = function (digits) {
-
+    const mapping = {
+        "1": [],
+        "2": ["a", "b", "c"],
+        "3": "def".split(""),
+        "4": "ghi".split(""),
+        "5": "jkl".split(""),
+        "6": "mno".split(""),
+        "7": "pqrs".split(""),
+        "8": "tuv".split(""),
+        "9": "wxyz".split(""),
+    }
+    const matchArr = [];
+    const pointDigit = (new Array(digits.length)).fill(0);
+    for (let i = 0; i < 4; i++) {
+        let match = "";
+        for (const digit of digits) {
+            if (mapping[digit][i]) {
+                match += mapping[digit][i];
+            }
+        }
+        if (match) {
+            matchArr.push(match);
+        }
+    }
+    return matchArr;
 };
 
