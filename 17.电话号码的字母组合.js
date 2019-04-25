@@ -44,16 +44,23 @@ var letterCombinations = function (digits) {
         "9": "wxyz".split(""),
     }
     const matchArr = [];
+    let pY = 0;
     const pointDigit = (new Array(digits.length)).fill(0);
-    for (let i = 0; i < 4; i++) {
+    while (pointDigit[0] === 4 && pointDigit[pointDigit.length - 1] === 4) {
         let match = "";
-        for (const digit of digits) {
-            if (mapping[digit][i]) {
-                match += mapping[digit][i];
+        for (let j = 0; j < digits.length; j++) {
+            const digit = digits[j];
+            if (mapping[digit][pointDigit[j]]) {
+                match += mapping[digit][pointDigit[j]];
             }
         }
         if (match) {
             matchArr.push(match);
+        }
+        if (pY < digits.length && pointDigit[pY] < 4) {
+            pointDigit[pY] = pointDigit[pY] + 1;
+        } else if (py < digits.length - 1 && pointDigit[py] == 4) {
+            py++;
         }
     }
     return matchArr;
