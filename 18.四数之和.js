@@ -10,18 +10,13 @@
  */
 var fourSum = function (nums, target) {
     const arrs = []
-    console.log(nums);
     nums = nums.sort((x, y) => {
-        console.log(x, typeof x, y, typeof y, x > y);
-        return x > y
+        return x - y
     });
-    console.log(nums);
     let i = 0, j = nums.length - 1;
-    console.log(nums)
     while (i < nums.length - 3) {
         let x = i + 1, z = j - 1;
         while (x < z) {
-            console.log(nums[i], nums[x], nums[z], nums[j])
             const sum = nums[i] + nums[x] + nums[z] + nums[j];
             if (sum === target) {
                 arrs.push([nums[i], nums[x], nums[z], nums[j]]);
@@ -44,12 +39,11 @@ var fourSum = function (nums, target) {
             while (nums[j] === nums[j - 1] && (j - i >= 2))--j;
             --j;
         } else {
-            while (nums[i] === nums[i + 1] && (j - i >= 2))++i;
+            while (nums[i] === nums[i + 1] && (i < nums.length - 3))++i;
             j = nums.length - 1
             ++i;
         }
     }
-    console.log(arrs);
     return arrs;
 };
 
