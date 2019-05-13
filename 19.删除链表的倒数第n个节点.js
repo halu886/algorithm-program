@@ -36,7 +36,7 @@ var removeNthFromEnd = function (head, n) {
     if (pResult) {
         pResult.next = pResult.next.next;
     } else {
-        pHead.next = pHead.next.next;
+        pHead = pHead.next;
     }
 
     return pHead;
