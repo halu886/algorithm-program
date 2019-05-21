@@ -40,7 +40,7 @@ var mergeTwoLists = function (l1, l2) {
     }
     // console.log(p1, p2, p, pHead);
     while (p1 !== pHead1 && p2 !== pHead2) {
-        // console.log(p1, p2);
+        console.log(p1.val, p2.val, p1 === pHead1, p2 === pHead2);
         if (p1.val < p2.val) {
             p.next = p1;
             p = p.next;
@@ -52,10 +52,17 @@ var mergeTwoLists = function (l1, l2) {
         }
     }
 
-    if (p1 !== pHead1) {
+    if (p1) {
+        // while (p1.next !== pHead1) {
+        //     p1 = p1.next;
+        // }
+        // p1.next = pHead
         p.next = p1;
     } else if (p2) {
-        p.next = p2
+        // while (p2.next !== pHead2) {
+        //     p2 = p2.next;
+        // }
+        p.next = p2;
     }
 
     return pHead;
