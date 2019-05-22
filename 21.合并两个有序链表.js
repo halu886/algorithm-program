@@ -16,6 +16,7 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function (l1, l2) {
+    console.log(l1, l2);
     let pHead = null;
     let pHead1 = l1;
     let pHead2 = l2;
@@ -38,9 +39,11 @@ var mergeTwoLists = function (l1, l2) {
         p = p2.next;
         p2 = p2.next;
     }
-    // console.log(p1, p2, p, pHead);
-    while (p1 !== pHead1 && p2 !== pHead2) {
-        console.log(p1.val, p2.val, p1 === pHead1, p2 === pHead2);
+
+    console.log(p1.val, pHead1.val, p2.val, pHead2.val, p1 === pHead1, p2 === pHead2);
+    console.log("start");
+    while (p1 === pHead1 || p2 === pHead2) {
+        console.log(p1.val, pHead1.val, p2.val, pHead2.val, p1 === pHead1, p2 === pHead2);
         if (p1.val < p2.val) {
             p.next = p1;
             p = p.next;
@@ -48,6 +51,22 @@ var mergeTwoLists = function (l1, l2) {
         } else {
             p.next = p2;
             p = p.next;
+            p2 = p2.next;
+        }
+    }
+    console.log("end");
+    console.log(p1.val, pHead1.val, p2.val, pHead2.val, p1 === pHead1, p2 === pHead2);
+    console.log("start");
+    while (p1 !== null && p1 !== pHead1 && p1 !== null && p2 !== pHead2) {
+        console.log(p1.val, pHead1.val, p2.val, pHead2.val, p1 === pHead1, p2 === pHead2);
+        if (p1.val < p2.val) {
+            p.next = p1;
+            p = p.next;
+            p1 = p1.next;
+        } else {
+            p.next = p2;
+            p = p.next;
+            console.log(p2)
             p2 = p2.next;
         }
     }
