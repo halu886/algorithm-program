@@ -18,7 +18,7 @@ public:
         string temp = tempLeft + tempRight;
 
         {
-                }
+        }
         while ()
     }
 };
