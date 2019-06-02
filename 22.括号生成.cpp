@@ -10,36 +10,48 @@ public:
     vector<string> result;
     vector<string> generateParenthesis(int n)
     {
-        result = {};
+        // cout << "start" << endl;
         recursion("", n);
+
+        // cout << "end" << endl;
+        // cout_v();
 
         return result;
     }
 
+    void cout_v()
+    {
+
+        for (int i = 0; i < result.size(); i++)
+        {
+            cout << result[i] << endl;
+        }
+    }
     void recursion(string str, int n)
     {
-        if (str.size() == n)
+        // cout << "start recursion" << endl;
+        // cout_v();
+        if (str.size() == n * 2)
         {
-            if (isValid(str))
+            if (balance(str) == 0)
             {
                 result.push_back(str);
             }
-            else
-            {
-                return;
-            }
+            return;
         }
-        if (isValid(str))
+        // cout << "balance:" << str << "\t" << balance(str) << endl;
+        if (balance(str) >= 0)
         {
             recursion(str + "(", n);
             recursion(str + ")", n);
         }
+        // cout << "end recursion" << endl;
     }
-    bool isValid(string str)
+    int balance(string str)
     {
         int balance = 0;
 
-        for (int i = 0; i < str.length(); i++)
+        for (int i = 0; i <= str.length(); i++)
         {
             char c = str[i];
             if (c == '(')
@@ -51,7 +63,6 @@ public:
                 balance--;
             }
         }
-        // return balance >= 0
-        return true;
+        return balance;
     }
 };
