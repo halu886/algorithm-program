@@ -18,19 +18,20 @@ public:
     {
         if (lists.size() == 0)
         {
-            return null;
+            return {};
         }
-        ListNode *p_index = p_head = &(lists[0]);
+        ListNode *p_index = lists[0];
+        ListNode *p_head = lists[0];
         int first_index = 0;
         for (int i = 0; i < lists.size(); i++)
         {
-            if (lists[i].val < p_index.val)
+            if (lists[i]->val < p_index->val)
             {
-                p_index = p_head = vector[i];
+                p_index = p_head = lists[i];
                 first_index = i;
             }
         }
-        vector[first_index] = vector[first_index].next;
+        lists[first_index] = lists[first_index]->next;
 
         for (; !isOver(lists);)
         {
@@ -38,20 +39,22 @@ public:
             int num_p = 0;
             for (int j = 0; j < lists.size(); j++)
             {
+                cout << "value:\t" << lists[j] << "\tindex:\t" << j << endl;
                 if (!lists[j])
                 {
                     continue;
                 }
-                if (lists[j] < p_temp.val)
+                count << "value:\t" << lists[j] << "\tval:\t" << lists[j]->val << endl;
+                if (lists[j]->val < p_temp->val)
                 {
                     p_temp = lists[j];
                     num_p = j;
                 }
             }
 
-            p_index.next = p_temp;
+            p_index->next = p_temp;
             p_index = p_temp;
-            lists[num_p] = lists[num_p].next;
+            lists[num_p] = lists[num_p]->next;
         }
 
         return p_head;
