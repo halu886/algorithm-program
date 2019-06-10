@@ -11,55 +11,48 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// #include <queue>
+// using namespace std;
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+struct cmp
+{
+    bool operator()(ListNode *a, ListNode *b)
+    {
+        return a->val > b->val;
+    }
+};
 class Solution
 {
+
 public:
-    ListNode *mergeKLists(vector<ListNode *> &lists)
+    ListNode *
+    mergeKLists(vector<ListNode *> &lists)
     {
         if (lists.size() == 0)
         {
             return {};
         }
         ListNode *p_index;
-        //     ;
-        //    lists[0];
         ListNode *p_head;
-        // lists[0];
+        p_index = p_head = NULL;
         int first_index = 0;
-        // for (int i = 0; i < lists.size(); i++)
-        // {
-        //     if (lists[i]->val < p_index->val)
-        //     {
-        //         p_index = p_head = lists[i];
-        //         first_index = i;
-        //     }
-        // }
-        // lists[first_index] = lists[first_index]->next;
-
-        for (; !isOver(lists);)
+        priority_queue<ListNode *, vector<ListNode *>, cmp> pq;
+        for (int i = 0; i < lists.size(); i++)
         {
-            ListNode *p_temp = lists[0];
-            int num_p = 0;
-            for (int j = 0; j < lists.size(); j++)
+            if (lists[i])
             {
-                if (!lists[j])
-                {
-                    continue;
-                }
-                cout << "value:\t" << lists[j] << "\tindex:\t" << j << "\tval:\t" << lists[j]->val << "\ttemp\t" << p_temp << endl;
-                if (p_temp && lists[j]->val < p_temp->val)
-                {
-                    p_temp = lists[j];
-                    num_p = j;
-                }
-                else if (!p_temp)
-                {
-                    p_temp = lists[j];
-                    num_p = j;
-                }
+                pq.push(lists[i]);
             }
-
-            cout << "\tp_index\t" << p_index << "\tp_temp\t" << p_temp << "num_p" << num_p << endl;
+        }
+        while (!pq.empty())
+        {
+            ListNode *p_temp = pq.top();
+            pq.pop();
             if (p_head)
             {
                 p_index->next = p_temp;
@@ -69,21 +62,16 @@ public:
             {
                 p_index = p_head = p_temp;
             }
-            lists[num_p] = lists[num_p]->next;
-        }
-
-        return p_head;
-    }
-
-    bool isOver(vector<ListNode *> &lists)
-    {
-        for (int i = 0; i < lists.size(); i++)
-        {
-            if (lists[i])
+            if (p_temp->next)
             {
-                return false;
+                pq.push(p_temp->next);
             }
         }
-        return true;
+
+        if (!p_head)
+        {
+            return {};
+        }
+        return p_head;
     }
 };
