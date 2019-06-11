@@ -18,7 +18,7 @@ public:
     {
         if (!head)
         {
-            return NULL;
+            return {};
         }
 
         ListNode *second;
@@ -39,7 +39,29 @@ public:
             swapPairsByAhead(head);
             return second;
         }
-
         return head;
+    }
+
+    void swapPairsByAhead(ListNode *&ahead)
+    {
+        if (!ahead)
+        {
+            return;
+        }
+        ListNode *second;
+        ListNode *third;
+        if (ahead->next)
+        {
+            cout << ahead->value << endl;
+            second = ahead->next;
+            if (second->next)
+            {
+                third = second->next;
+                second->next = third;
+                ahead->next = third;
+                swapPairsByAhead(third);
+            }
+        }
+        return;
     }
 };
