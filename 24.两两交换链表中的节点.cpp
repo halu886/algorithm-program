@@ -50,16 +50,19 @@ public:
         }
         ListNode *second;
         ListNode *third;
+        cout << ahead->val << endl;
         if (ahead->next)
         {
-            cout << ahead->value << endl;
             second = ahead->next;
+            cout << second->val << endl;
             if (second->next)
             {
                 third = second->next;
-                second->next = third;
+                cout << third->val << endl;
                 ahead->next = third;
-                swapPairsByAhead(third);
+                second->next = third->next;
+                third->next = second;
+                swapPairsByAhead(second);
             }
         }
         return;

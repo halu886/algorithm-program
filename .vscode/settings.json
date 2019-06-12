@@ -24,5 +24,12 @@
         "-std=c++17",
         "-Wall"
     ],
-    "clang.completion.enable": true // 效果比cpptools要好
+    "clang.completion.enable": true,
+    "files.associations": {
+        "istream": "cpp",
+        "optional": "cpp",
+        "ostream": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp"
+    } // 效果比cpptools要好
 }
