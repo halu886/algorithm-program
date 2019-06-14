@@ -18,8 +18,8 @@ public:
     {
         ListNode *temp = head;
         ListNode *mid = NULL;
-        double midIndex = double(k) / 2;
-        if (int i = 0; i < k; i++)
+        double midIndex = (double)k / 2.0;
+        for (int i = 0; i < k; i++)
         {
             if (temp = NULL)
             {
@@ -32,10 +32,17 @@ public:
             temp = temp->next;
         }
 
+        ListNode *first = head;
+        ListNode *second = head->next;
         // k内所有节点指针往上翻转
-        for (int i = 0; i < k / 2; i++)
+        for (int i = 0; i < k - 2; i++)
         {
-            if ()
+            ListNode *third = second->next;
+            second->next = first;
+            first = second;
+            second = third;
         }
+        head->next = reverseKGroup(second->next, k);
+        return second;
     }
 };
