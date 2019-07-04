@@ -1,4 +1,4 @@
-    
+
 /*
  * @lc app=leetcode.cn id=25 lang=cpp
  *
@@ -18,26 +18,31 @@ public:
     ListNode *reverseKGroup(ListNode *head, int k)
     {
         ListNode *temp = head;
-        ListNode *mid = NULL;
-        double midIndex = (double)k / 2.0;
+        // ListNode *mid = NULL;
+        // double midIndex = (double)k / 2.0;
         for (int i = 0; i < k; i++)
         {
-            if (temp = NULL)
+            cout << temp->val << endl;
+            if (temp == NULL)
             {
                 return head;
             }
-            if (i <= midIndex && i + 1 > midIndex)
-            {
-                mid = temp;
-            }
+            // if (i <= midIndex && i + 1 > midIndex)
+            // {
+            //     mid = temp;
+            // }
             temp = temp->next;
         }
 
+        cout << "loop over" << endl;
         ListNode *first = head;
         ListNode *second = head->next;
         // k内所有节点指针往上翻转
-        for (int i = 0; i < k - 2; i++)
+        for (int i = 0; i < k - 1; i++)
         {
+            cout << "convert" << endl;
+            cout << first->val << "\t" << second->val << endl;
+            cout << "convert end" << endl;
             ListNode *third = second->next;
             second->next = first;
             first = second;
