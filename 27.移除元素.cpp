@@ -10,21 +10,21 @@ public:
     {
         if (!nums.size())
         {
-            return 0;
+            return nums.size();
         }
         int beginIndex = 0;
         int endIndex = nums.size() - 1;
 
         while (beginIndex < endIndex)
         {
-            cout << beginIndex << "\t" << endIndex << endl;
+            // cout << beginIndex << "\t" << endIndex << endl;
             if (nums[beginIndex] != val)
             {
                 ++beginIndex;
                 continue;
             }
 
-            while (nums[endIndex] == val)
+            while (nums[endIndex] == val && endIndex > beginIndex)
             {
                 --endIndex;
             }
@@ -36,11 +36,11 @@ public:
 
             nums[beginIndex++] = nums[endIndex];
             nums[endIndex--] = val;
-            cout << "last" << endl;
-            cout << beginIndex << "\t" << endIndex << endl;
-            cout << "last end" << endl;
+            // cout << "last" << endl;
+            // cout << beginIndex << "\t" << endIndex << endl;
+            // cout << "last end" << endl;
         }
 
-        return beginIndex + 1;
+        return endIndex ? beginIndex + 1 : 0;
     }
 };
