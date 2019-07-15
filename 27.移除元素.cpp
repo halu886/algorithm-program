@@ -15,6 +15,11 @@ public:
         int beginIndex = 0;
         int endIndex = nums.size() - 1;
 
+        while (endIndex > -1 && nums[endIndex] == val)
+        {
+            --endIndex;
+        }
+
         while (beginIndex < endIndex)
         {
             // cout << beginIndex << "\t" << endIndex << endl;
