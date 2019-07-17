@@ -15,14 +15,8 @@ public:
         int beginIndex = 0;
         int endIndex = nums.size() - 1;
 
-        while (endIndex > -1 && nums[endIndex] == val)
-        {
-            --endIndex;
-        }
-
         while (beginIndex < endIndex)
         {
-            // cout << beginIndex << "\t" << endIndex << endl;
             if (nums[beginIndex] != val)
             {
                 ++beginIndex;
@@ -41,11 +35,12 @@ public:
 
             nums[beginIndex++] = nums[endIndex];
             nums[endIndex--] = val;
-            // cout << "last" << endl;
-            // cout << beginIndex << "\t" << endIndex << endl;
-            // cout << "last end" << endl;
         }
 
-        return endIndex ? beginIndex + 1 : 0;
+        while (endIndex > -1 && nums[endIndex] == val)
+        {
+            --endIndex;
+        }
+        return endIndex + 1;
     }
 };
