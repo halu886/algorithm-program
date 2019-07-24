@@ -31,6 +31,7 @@ public:
         int add_count = 1;
         int divisor_add = divisor;
         int max = 2;
+        // cout << dividend_symbol << "\t" << divisor_symbol << "\t" << is_equel << endl;
         if(is_equel){
             while(dividend-divisor>=dividend_symbol||dividend==divisor){
                 if(dividend-divisor_add>=dividend_symbol||dividend==divisor_add){
@@ -42,13 +43,25 @@ public:
                 }
             }
         }else{
-            while(dividend+divisor>=dividend_symbol||dividend==divisor){
-                if(dividend-divisor_add>=dividend_symbol||dividend==divisor_add){
-                    dividend -= divisor_add;
-                    count += add_count;
-                }else{
-                    divisor_add -= divisor;
-                    --add_count;
+            if(dividend>0){
+                while(dividend+divisor>=dividend_symbol||dividend==divisor){
+                    if(dividend-divisor_add>=dividend_symbol||dividend==divisor_add){
+                        dividend -= divisor_add;
+                        count -= add_count;
+                    }else{
+                        divisor_add -= divisor;
+                        --add_count;
+                    }
+                }
+            }else{
+                while(dividend+divisor<=dividend_symbol||dividend==divisor){
+                    if(dividend+divisor_add<=dividend_symbol||dividend==divisor_add){
+                        dividend += divisor_add;
+                        count -= add_count;
+                    }else{
+                        divisor_add -= divisor;
+                        --add_count;
+                    }
                 }
             }
         }
