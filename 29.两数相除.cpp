@@ -44,8 +44,9 @@ public:
             }
         }else{
             if(dividend>0){
-                while(dividend+divisor>=dividend_symbol||dividend==divisor){
-                    if(dividend-divisor_add>=dividend_symbol||dividend==divisor_add){
+                while(dividend+divisor>=dividend_symbol||dividend+divisor==0){
+                    cout << dividend << "\t"<<divisor<<"\t"<<divisor_add<<"\t"<<dividend_symbol<<"\t"<<count<<endl;
+                    if(dividend-divisor_add>=dividend_symbol||dividend+divisor_add==0){
                         dividend -= divisor_add;
                         count -= add_count;
                     }else{
@@ -53,9 +54,11 @@ public:
                         --add_count;
                     }
                 }
+                cout << dividend << "\t"<<divisor<<"\t"<<divisor_add<<"\t"<<dividend_symbol<<"\t"<<count<<endl;
             }else{
-                while(dividend+divisor<=dividend_symbol||dividend==divisor){
-                    if(dividend+divisor_add<=dividend_symbol||dividend==divisor_add){
+                while(dividend+divisor<=dividend_symbol||dividend+divisor==0){
+                    // cout << dividend << "\t"<<divisor<<"\t"<<divisor_add<<"\t"<<dividend_symbol<<"\t"<<count<<endl;
+                    if(dividend+divisor_add<=dividend_symbol||dividend+divisor_add==0){
                         dividend += divisor_add;
                         count -= add_count;
                     }else{
@@ -63,6 +66,7 @@ public:
                         --add_count;
                     }
                 }
+                // cout << dividend << "\t"<<divisor<<"\t"<<divisor_add<<"\t"<<dividend_symbol<<"\t"<<count<<endl;
             }
         }
         return count;
