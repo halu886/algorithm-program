@@ -11,6 +11,10 @@ public:
 
         for (int i = 0; i < vector.size; i++)
         {
+            bool isFind = false;
+            for (int j = 0; j < s.length; j++)
+            {
+                        }
         }
     }
 };
