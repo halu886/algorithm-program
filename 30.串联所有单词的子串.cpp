@@ -17,10 +17,11 @@ public:
         int wordSize = words[0].size();
         int wordSizeSum = wordSize * words.size();
         int result[] = {};
-        unordered_map<string, int> vectorHash;
-        for (string word of words)
+        unordered_map<string, int> vectorHash(10);
+        for (int i = 0; i < words.size(); i++)
         {
-            if (vectorHash.has(word))
+            string word = words[i];
+            if (vectorHash.contians(word))
             {
                 vectorHash.set(word, vectorhash.get(word) + 1);
             }
