@@ -16,46 +16,62 @@ public:
 
         int wordSize = words[0].size();
         int wordSizeSum = wordSize * words.size();
-        int result[] = {};
-        unordered_map<string, int> vectorHash(10);
+
+        if (wordSizeSum > s.size())
+        {
+            return {};
+        }
+        vector<int> result;
+        unordered_map<string, int> vectorHash;
         for (int i = 0; i < words.size(); i++)
         {
             string word = words[i];
-            if (vectorHash.contians(word))
+            if (vectorHash[word])
             {
-                vectorHash.set(word, vectorhash.get(word) + 1);
+                ++vectorHash[word];
             }
             else
             {
-                vectorHash.set(word, 1);
+                vectorHash[word] = 1;
             }
         }
-        for (int i = 0; i < (s.length - wordSizeSum); i++)
+        // for (const auto &n : vectorHash)
+        // {
+        //     cout << n.first << "\t" << n.second << endl;
+        // }
+        for (int i = 0; i <= (s.size() - wordSizeSum); i++)
         {
             unordered_map<string, int> wordHash;
             bool isMatch = true;
+            // cout << "begin" << endl;
             for (int j = i; j < i + wordSizeSum; j = j + wordSize)
             {
-                string word = s.sub(j, wordSize);
-                if (wordHash.has(word))
+                string word = s.substr(j, wordSize);
+
+                if (wordHash[word])
                 {
-                    wordHash.set(word, wordHash.get(word) + 1);
+                    ++wordHash[word];
                 }
                 else
                 {
-                    wordHash.set(word, 1);
+                    wordHash[word] = 1;
                 }
+                // cout << word << int(wordHash[word]) << endl;
+                // cout << i << "\t" << j << endl;
 
-                if (wordHash.get(word) > vectorHash.get(word))
+                if (wordHash[word] > vectorHash[word])
                 {
                     isMatch = false;
                     break;
                 }
             }
 
+            // cout << "end"
+            //      << "\t" << isMatch << "\t" << s << endl;
+            // cout << i << "\t" << s.size() << "\t" << wordSizeSum << endl;
             if (isMatch)
             {
-                result.push(i);
+                result.push_back(i);
             }
         }
         return result;
