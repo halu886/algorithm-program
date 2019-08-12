@@ -16,6 +16,7 @@ public:
             {
                 for (int j = i + 1; i < nums.size() && !isArrange; i++)
                 {
+                    cout << i << "\t" << nums[i] << "\t" << j << "\t" << nums[j] << endl;
                     if (nums[i - 1] > nums[j])
                     {
                         isArrange = true;
@@ -24,6 +25,8 @@ public:
                         nums[j - 1] = temp;
                     }
                 }
+                cout << "arrange"
+                     << "\t" << isArrange << "\t" << i << "\t" << nums[i] << "\t" << endl;
                 if (!isArrange)
                 {
                     isArrange = true;
