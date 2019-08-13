@@ -14,25 +14,37 @@ public:
         {
             if (nums[i] > nums[i - 1])
             {
-                for (int j = i + 1; i < nums.size() && !isArrange; i++)
+                for (int j = i; j < nums.size() && !isArrange; j++)
                 {
-                    cout << i << "\t" << nums[i] << "\t" << j << "\t" << nums[j] << endl;
+                    //todo
                     if (nums[i - 1] > nums[j])
                     {
                         isArrange = true;
                         temp = nums[i - 1];
-                        nums[i - 1] = nums[j - 1];
-                        nums[j - 1] = temp;
+                        nums[i - 1] = nums[j];
+                        nums[j] = temp;
                     }
                 }
-                cout << "arrange"
-                     << "\t" << isArrange << "\t" << i << "\t" << nums[i] << "\t" << endl;
                 if (!isArrange)
                 {
                     isArrange = true;
                     temp = nums[i - 1];
                     nums[i - 1] = nums[nums.size() - 1];
                     nums[nums.size() - 1] = temp;
+                }
+                cout << isArrange << "\t" << i << nums[i] << "\t" << nums[i + 1] << endl;
+                for (int j = i; j < nums.size(); j++)
+                {
+                    for (int x = j + 1; x < nums.size(); x++)
+                    {
+                        // cout << j << "\t" << x << "\t" << nums[j] << "\t" << nums[x] << endl;
+                        if (nums[j] > nums[x])
+                        {
+                            temp = nums[j];
+                            nums[j] = nums[x];
+                            nums[x] = temp;
+                        }
+                    }
                 }
             }
         }
