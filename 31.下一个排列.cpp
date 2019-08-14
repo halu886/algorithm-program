@@ -17,12 +17,12 @@ public:
                 for (int j = i; j < nums.size() && !isArrange; j++)
                 {
                     //todo
-                    if (nums[i - 1] > nums[j])
+                    if (nums[i - 1] >= nums[j])
                     {
                         isArrange = true;
                         temp = nums[i - 1];
-                        nums[i - 1] = nums[j];
-                        nums[j] = temp;
+                        nums[i - 1] = nums[j - 1];
+                        nums[j - 1] = temp;
                     }
                 }
                 if (!isArrange)
@@ -32,12 +32,10 @@ public:
                     nums[i - 1] = nums[nums.size() - 1];
                     nums[nums.size() - 1] = temp;
                 }
-                cout << isArrange << "\t" << i << nums[i] << "\t" << nums[i + 1] << endl;
                 for (int j = i; j < nums.size(); j++)
                 {
                     for (int x = j + 1; x < nums.size(); x++)
                     {
-                        // cout << j << "\t" << x << "\t" << nums[j] << "\t" << nums[x] << endl;
                         if (nums[j] > nums[x])
                         {
                             temp = nums[j];
