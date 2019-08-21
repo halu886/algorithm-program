@@ -23,8 +23,10 @@ public:
             {
                 if (!leftSum)
                 {
-                    cout << "case1\t" << s << "\t" << i << "\t" << s[i] << "\t" << maxLength << endl;
+                    // cout << "case1\t" << s << "\t" << i << "\t" << s[i] << "\t" << maxLength << endl;
+                    // cout << "str\t" << s << "\t" << s.substr(1) << endl;
                     int anotherLength = longestValidParentheses(s.substr(1));
+                    // cout << "case2\t" << (anotherLength > maxLength ? anotherLength : maxLength) << endl;
                     return anotherLength > maxLength ? anotherLength : maxLength;
                 }
                 --leftSum;
@@ -35,9 +37,12 @@ public:
         if (leftSum)
         {
             // cout << "case2\t" << s.substr(1) << endl;
-            return longestValidParentheses(s.substr(1));
+            // cout << "str\t" << s << "\t" << s.substr(1) << endl;
+            int rightSub = longestValidParentheses(s.substr(1));
+            int leftSub = longestValidParentheses(s.substr(0, s.size() - 1));
+            return rightSub > leftSub ? rightSub : leftSub;
         }
-        // cout << "case3\t" << s.size() << endl;
+        // cout << "case3\t" << maxLength << endl;
         return maxLength;
     }
 };
