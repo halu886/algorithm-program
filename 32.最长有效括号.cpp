@@ -8,7 +8,6 @@ class Solution
 public:
     int longestValidParentheses(string s)
     {
-        // cout << s << endl;
         int leftSum = 0;
         int maxLength = 0;
         for (int i = 0; i < s.size(); i++)
@@ -23,10 +22,12 @@ public:
             {
                 if (!leftSum)
                 {
-                    // cout << "case1\t" << s << "\t" << i << "\t" << s[i] << "\t" << maxLength << endl;
-                    // cout << "str\t" << s << "\t" << s.substr(1) << endl;
+                    string substr = s.substr(1);
+                    if (substr.size() < maxLength)
+                    {
+                        return maxLength;
+                    }
                     int anotherLength = longestValidParentheses(s.substr(1));
-                    // cout << "case2\t" << (anotherLength > maxLength ? anotherLength : maxLength) << endl;
                     return anotherLength > maxLength ? anotherLength : maxLength;
                 }
                 --leftSum;
@@ -36,13 +37,10 @@ public:
 
         if (leftSum)
         {
-            // cout << "case2\t" << s.substr(1) << endl;
-            // cout << "str\t" << s << "\t" << s.substr(1) << endl;
             int rightSub = longestValidParentheses(s.substr(1));
             int leftSub = longestValidParentheses(s.substr(0, s.size() - 1));
             return rightSub > leftSub ? rightSub : leftSub;
         }
-        // cout << "case3\t" << maxLength << endl;
         return maxLength;
     }
 };
