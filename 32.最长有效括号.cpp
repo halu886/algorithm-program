@@ -45,48 +45,103 @@
 //     }
 // };
 
+// class Solution
+// {
+// public:
+//     int longestValidParentheses(string s)
+//     {
+//         int maxLength = 0;
+//         for (int i = 0; i < s.size(); i++)
+//         {
+//             for (int j = i + 2; j <= s.size(); j = j + 2)
+//             {
+//                 int length = j - i;
+//                 if (isValid(s.substr(i, length)) && maxLength < length)
+//                 {
+//                     maxLength = length;
+//                 }
+//             }
+//         }
+//         return maxLength;
+//     };
+//     bool isValid(string substr)
+//     {
+//         stack<char> strStack;
+//         for (int i = 0; i < substr.size(); i++)
+//         {
+//             if (substr[i] == '(')
+//             {
+//                 strStack.push('(');
+//             }
+//             else if (substr[i] == ')' && strStack.size() > 0)
+//             {
+//                 strStack.pop();
+//             }
+//             else
+//             {
+//                 return false;
+//             }
+//         }
+
+//         if (strStack.size())
+//         {
+//             return false;
+//         }
+//         return true;
+//     };
+// };
+#include <array>
 class Solution
 {
 public:
     int longestValidParentheses(string s)
     {
-        int maxLength = 0;
-        for (int i = 0; i < s.size(); i++)
+        if (s.size() < 2)
         {
-            for (int j = i + 2; j <= s.size(); j = j + 2)
-            {
-                int length = j - i;
-                if (isValid(s.substr(i, length)) && maxLength < length)
-                {
-                    maxLength = length;
-                }
-            }
+            return 0;
         }
-        return maxLength;
-    };
-    bool isValid(string substr)
-    {
-        stack<char> strStack;
-        for (int i = 0; i < substr.size(); i++)
+        int maxLength = 0;
+        std::array<int, s.size()> arrayInt;
+
+        if (s.size() >= 2)
         {
-            if (substr[i] == '(')
+            if (s[0] == '(' && s[1] == ')')
             {
-                strStack.push('(');
-            }
-            else if (substr[i] == ')' && strStack.size() > 0)
-            {
-                strStack.pop();
-            }
-            else
-            {
-                return false;
+                s[1] = 2;
+                maxLength = 2;
             }
         }
 
-        if (strStack.size())
+        for (int i = 2; i < s.size(); i++)
         {
-            return false;
+            if (s[i] == '(')
+            {
+                arrayInt[i] = 0;
+                continue;
+            }
+
+            for (int j = 0; j < arrayInt.size(); j++)
+            {
+                cout << arrayInt[j] << endl;
+            }
+            cout << i << endl;
+            if (s[i - 1] == '(')
+            {
+                arrayInt[i] = arrayInt[i - 2] + 2;
+            }
+            else if (s[i - 1] == ')')
+            {
+                if (arrayInt[i - arrayInt[i - 1] - 1] == '(')
+                {
+                    arrayInt[i] = arrayInt[i - 1] + 2 + arrayInt[i - arrayInt[i - 1] - 2];
+                }
+            }
+
+            if (maxLength < arrayInt[i])
+            {
+                maxLength = arrayInt[i];
+            }
         }
-        return true;
+        return maxLength;
     };
 };
