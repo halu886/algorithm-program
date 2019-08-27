@@ -11,7 +11,7 @@ public:
         int reversal = 0;
         int begin = 0;
         int end = nums[nums.size() - 1];
-        for (int i = 0; i < nums.size(); i++)
+        for (int i = 0; i < nums.size() - 1; i++)
         {
             if (nums[i] < nums[i + 1])
             {
@@ -31,5 +31,26 @@ public:
                 break;
             }
         }
-    }
+
+        cout << end << "\t" << begin << endl;
+
+        while (end >= begin)
+        {
+            int mid = (end + begin) / 2;
+            if (nums[mid] > target)
+            {
+                end = mid;
+            }
+            else if (nums[mid] < target)
+            {
+                begin = mid;
+            }
+            else
+            {
+                return mid;
+            }
+        }
+
+        return -1;
+    };
 };
