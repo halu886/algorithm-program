@@ -101,13 +101,18 @@ public:
             return 0;
         }
         int maxLength = 0;
-        std::array<int, s.size()> arrayInt;
+        vector<int> arrayInt;
+
+        for (int i = 0; i < s.size(); i++)
+        {
+            arrayInt.push_back(0);
+        }
 
         if (s.size() >= 2)
         {
             if (s[0] == '(' && s[1] == ')')
             {
-                s[1] = 2;
+                arrayInt[1] = 2;
                 maxLength = 2;
             }
         }
@@ -120,20 +125,31 @@ public:
                 continue;
             }
 
-            for (int j = 0; j < arrayInt.size(); j++)
-            {
-                cout << arrayInt[j] << endl;
-            }
-            cout << i << endl;
+            // for (int j = 0; j < arrayInt.size(); j++)
+            // {
+            //     cout << arrayInt[j] << endl;
+            // }
+            // cout << "index\t" << i << endl;
             if (s[i - 1] == '(')
             {
                 arrayInt[i] = arrayInt[i - 2] + 2;
             }
             else if (s[i - 1] == ')')
             {
-                if (arrayInt[i - arrayInt[i - 1] - 1] == '(')
+                if (i - arrayInt[i - 1] - 1 < 0)
                 {
-                    arrayInt[i] = arrayInt[i - 1] + 2 + arrayInt[i - arrayInt[i - 1] - 2];
+                    arrayInt[i] = 0;
+                    continue;
+                }
+                // cout << arrayInt[i - 1] << s[i - arrayInt[i - 1] - 1] << "\tarray[i]" << endl;
+                if (s[i - arrayInt[i - 1] - 1] == '(')
+                {
+                    int t = 0;
+                    if (i - arrayInt[i - 1] - 2 >= 0)
+                    {
+                        t = arrayInt[i - arrayInt[i - 1] - 2];
+                    }
+                    arrayInt[i] = arrayInt[i - 1] + 2 + t;
                 }
             }
 
