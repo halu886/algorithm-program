@@ -16,12 +16,13 @@ public:
         range.push_back(-1);
         while (begin < end)
         {
-            int mid = begin + (end - begin) >> 1 + 1;
-            if (mid < target)
+            int mid = begin + ((end - begin) >> 1) + 1;
+            // cout << begin << "\t" << ((end - begin) >> 1) << "\t" << end << "\t" << mid << endl;
+            if (nums[mid] < target)
             {
                 begin = mid;
             }
-            else if (mid > target)
+            else if (nums[mid] > target)
             {
                 end = mid;
             }
@@ -33,6 +34,7 @@ public:
                 int isBeginIndex = mid;
                 while (!(isEnd && isBegin))
                 {
+                    // cout << "inclose\t" << isEnd << "\t" << isBegin << "\t" << isEndIndex << "\t" << isBeginIndex << "\t" << endl;
                     if (!isEnd && nums[isEndIndex] == target)
                     {
                         range[1] = isEndIndex++;
@@ -48,7 +50,7 @@ public:
 
                     if (!isBegin && nums[isBeginIndex] == target)
                     {
-                        range[0] = isBeginIndex++;
+                        range[0] = isBeginIndex--;
                         if (isBeginIndex >= nums.size())
                         {
                             isBegin = true;
@@ -56,9 +58,10 @@ public:
                     }
                     else if (!isBegin && nums[isBeginIndex] != target)
                     {
-                        isEnd = true;
+                        isBegin = true;
                     }
                 }
+                break;
             }
         }
         return range;
