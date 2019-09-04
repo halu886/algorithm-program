@@ -10,30 +10,27 @@ public:
     {
 
         int begin = 0;
-        int end = nums.size();
+        int end = nums.size() - 1;
         vector<int> range;
         range.push_back(-1);
         range.push_back(-1);
-        while (begin < end)
+
+        if (!nums.size())
+        {
+            return range;
+        }
+        while (begin <= end)
         {
             int mid;
-            if (end - begin <= 1)
-            {
-                // ++begin;
-                mid = end;
-            }
-            else
-            {
-                mid = begin + ((end - begin) >> 1);
-            }
-            cout << begin << "\t" << ((end - begin) >> 1) << "\t" << end << "\t" << mid << endl;
+            mid = begin + ((end - begin) >> 1);
+            // cout << begin << "\t" << ((end - begin) >> 1) << "\t" << end << "\t" << mid << endl;
             if (nums[mid] < target)
             {
-                begin = mid;
+                begin = mid + 1;
             }
             else if (nums[mid] > target)
             {
-                end = mid;
+                end = mid - 1;
             }
             else
             {
@@ -43,7 +40,7 @@ public:
                 int isBeginIndex = mid;
                 while (!(isEnd && isBegin))
                 {
-                    cout << "inclose\t" << isEnd << "\t" << isBegin << "\t" << isEndIndex << "\t" << isBeginIndex << "\t" << endl;
+                    // cout << "inclose\t" << isEnd << "\t" << isBegin << "\t" << isEndIndex << "\t" << isBeginIndex << "\t" << endl;
                     if (!isEnd && nums[isEndIndex] == target)
                     {
                         range[1] = isEndIndex++;
