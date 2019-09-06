@@ -30,8 +30,11 @@ public:
         for (int i = 0; i < 9; i += 3)
         {
 
-            for (int i = 0; i < 9; i += 3)
+            for (int j = 0; j < 9; j += 3)
             {
+                for (int x = i; x < i + 3)
+                {
+                }
             }
         }
     }
