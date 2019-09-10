@@ -29,13 +29,24 @@ public:
 
         for (int i = 0; i < 9; i += 3)
         {
-
             for (int j = 0; j < 9; j += 3)
             {
-                for (int x = i; x < i + 3)
+                hashtable<char, int> chunk;
+                for (int x = i; x < i + 3; x++)
                 {
+                    bool isBreak = false;
+                    for (int y = j; y < j + 3; y++)
+                    {
+                        if (chunk.has(board[x][y]))
+                        {
+                            return false;
+                        }
+                        chunk.push(board[x][y]);
+                    }
                 }
             }
         }
+
+        return true;
     }
 };
