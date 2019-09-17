@@ -17,18 +17,48 @@ public:
         {
             for (int j = 0; j < 9; j++)
             {
-                if ()
+                if (board[i][j] == '.')
                 {
+                    continue;
                 }
                 xs[i][board[i][j]] = 1;
-                ys[y][board[i][j]] = 1;
+                ys[j][board[i][j]] = 1;
+                blocks[i / 3 * 3 + j / 3][board[i][j]] = 1;
             }
         }
 
+        int i = 0;
+        int j = 0;
         while
         {
+            if (board[i][j] != '.')
+            {
+                continue;
+            }
+
+            for (int x = 0; x < 9; x++)
+            {
+                if (!xs[i][x] & !ys[j][x] & !blocks[i / 3 * 3 + j / 3][x])
+                {
+                    board[i][j] = x;
+                }
+            }
+
+            if (board[i][j] == '.')
+            {
+                if (j > 0)
+                {
+                    j--;
+                }
+                else
+                {
+                    x--;
+                    j = 9;
+                }
+            }
         }
         do
-            (isOver)
+            j = 9;
+        (isOver)
     }
 };
