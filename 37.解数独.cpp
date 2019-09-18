@@ -11,6 +11,8 @@ public:
         unordered_map[9] xs;
         unordered_map[9] ys;
         unordered_map[9] blocks;
+
+        vector<vector<int>> coords;
         bool isOver = false;
 
         for (int i = 0; i < 9; i++)
@@ -19,6 +21,7 @@ public:
             {
                 if (board[i][j] == '.')
                 {
+                    coords.push({i, j});
                     continue;
                 }
                 xs[i][board[i][j]] = 1;
@@ -27,21 +30,25 @@ public:
             }
         }
 
-        int i = 0;
-        int j = 0;
-        while
+        int index = 0;
+        while (index < coords.length)
         {
+            int i = coords[index][0];
+            int j = coords[index][1];
             if (board[i][j] != '.')
             {
-                continue;
+                board[i][j] = ++board[i][j];
+            }
+            else
+            {
+                board[i][j] = 1;
             }
 
-            for (int x = 0; x < 9; x++)
+            int x = board[i][j];
+
+            if (!xs[i][x] & !ys[j][x] & !blocks[i / 3 * 3 + j / 3][x])
             {
-                if (!xs[i][x] & !ys[j][x] & !blocks[i / 3 * 3 + j / 3][x])
-                {
-                    board[i][j] = x;
-                }
+                board[i][j] = x;
             }
 
             if (board[i][j] == '.')
@@ -57,8 +64,5 @@ public:
                 }
             }
         }
-        do
-            j = 9;
-        (isOver)
     }
 };
