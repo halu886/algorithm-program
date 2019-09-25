@@ -8,9 +8,9 @@ class Solution
 public:
     void solveSudoku(vector<vector<char>> &board)
     {
-        unordered_map[9] xs;
-        unordered_map[9] ys;
-        unordered_map[9] blocks;
+        vector<vector<int>> xs;
+        vector<vector<int>> ys;
+        vector<vector<int>> blocks;
 
         vector<vector<int>> coords;
         bool isOver = false;
@@ -21,48 +21,50 @@ public:
             {
                 if (board[i][j] == '.')
                 {
-                    coords.push({i, j});
-                    continue;
-                }
-                xs[i][board[i][j]] = 1;
-                ys[j][board[i][j]] = 1;
-                blocks[i / 3 * 3 + j / 3][board[i][j]] = 1;
+                    coords[i], j
+                });
+                continue;
             }
+            xs[i][board[i][j]] = 1;
+            ys[j][board[i][j]] = 1;
+            blocks[i / 3 * 3 + j / 3][board[i][j]] = 1;
+        }
+    }
+
+    int index = 0;
+    while (index < coords.length)
+    {
+        int i = coords[index][0];
+        int j = coords[index][1];
+        if (board[i][j] != '.')
+        {
+            board[i][j] = ++board[i][j];
+        }
+        else
+        {
+            board[i][j] = 1;
         }
 
-        int index = 0;
-        while (index < coords.length)
+        int x = board[i][j];
+
+        if (!xs[i][x] & !ys[j][x] & !blocks[i / 3 * 3 + j / 3][x])
         {
-            int i = coords[index][0];
-            int j = coords[index][1];
-            if (board[i][j] != '.')
+            board[i][j] = x;
+        }
+
+        if (board[i][j] == '.')
+        {
+            if (j > 0)
             {
-                board[i][j] = ++board[i][j];
+                j--;
             }
             else
             {
-                board[i][j] = 1;
-            }
-
-            int x = board[i][j];
-
-            if (!xs[i][x] & !ys[j][x] & !blocks[i / 3 * 3 + j / 3][x])
-            {
-                board[i][j] = x;
-            }
-
-            if (board[i][j] == '.')
-            {
-                if (j > 0)
-                {
-                    j--;
-                }
-                else
-                {
-                    x--;
-                    j = 9;
-                }
+                x--;
+                j = 9;
             }
         }
     }
-};
+}
+}
+;
