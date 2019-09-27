@@ -26,10 +26,13 @@
     ],
     "clang.completion.enable": true,
     "files.associations": {
+        "*.tpl": "html",
         "istream": "cpp",
         "optional": "cpp",
         "ostream": "cpp",
         "system_error": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp"
     } // 效果比cpptools要好
 }
