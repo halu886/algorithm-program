@@ -24,12 +24,16 @@ public:
                     coords.push_back({i, j});
                     continue;
                 }
+                // 二维vector未初始化
                 xs[i][board[i][j]] = 1;
                 ys[j][board[i][j]] = 1;
                 blocks[i / 3 * 3 + j / 3][board[i][j]] = 1;
             }
         }
-
+        printVector(xs);
+        printVector(ys);
+        printVector(blocks);
+        printVector(coords);
         int index = 0;
         while (index < coords.size())
         {
@@ -64,5 +68,19 @@ public:
                 }
             }
         }
+    }
+
+    void printVector(vector<vector<int>> &board)
+    {
+        cout << "[";
+        for (int i = 0; i < board.size(); i++)
+        {
+            cout << "[";
+            for (int j = 0; j < board[i].size(); j++)
+            {
+                cout << board[i][j] << "\t";
+            }
+        }
+        cout << "]" << endl;
     }
 };
