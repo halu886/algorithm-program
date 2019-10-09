@@ -5,13 +5,14 @@
  */
 class Solution
 {
+private:
+    vector<vector<bool>> xs;
+    vector<vector<bool>> ys;
+    vector<vector<bool>> blocks;
+
 public:
     void solveSudoku(vector<vector<char>> &board)
     {
-        vector<vector<int>> xs;
-        vector<vector<int>> ys;
-        vector<vector<int>> blocks;
-
         vector<vector<int>> coords;
         bool isOver = false;
 
@@ -68,19 +69,5 @@ public:
                 }
             }
         }
-    }
-
-    void printVector(vector<vector<int>> &board)
-    {
-        cout << "[";
-        for (int i = 0; i < board.size(); i++)
-        {
-            cout << "[";
-            for (int j = 0; j < board[i].size(); j++)
-            {
-                cout << board[i][j] << "\t";
-            }
-        }
-        cout << "]" << endl;
     }
 };
