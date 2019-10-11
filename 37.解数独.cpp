@@ -6,9 +6,9 @@
 class Solution
 {
 private:
-    vector<vector<bool>> xs;
-    vector<vector<bool>> ys;
-    vector<vector<bool>> blocks;
+    vector<vector<bool>> rows;
+    vector<vector<bool>> cols;
+    vector<vector<bool>> boxes;
     int n = 0;
     int m = 0;
 
@@ -52,7 +52,6 @@ private:
 
         int box_id = (i / m) * m + j / m;
 
-        // todo
         for (int k = 1; k <= n; ++k)
         {
             char c = '0' + k;
@@ -69,10 +68,22 @@ private:
             erase(c, i, j, box_id);
             board[i][j] = '.';
         }
+        return false;
+    }
+    bool has(char c, int i, int j, int b)
+    {
+        return rows[i][c - '0'] || cols[j][c - '0'] || boxes[b][c - '0'];
+    }
+    void erase(char c, int i, int j, int b)
+    {
+        rows[i][c - '0'] = false;
+        cols[j][c - '0'] = false;
+        boxes[b][c - '0'] = false;
     }
 
 public:
-    void solveSudoku(vector<vector<char>> &board)
+    void
+    solveSudoku(vector<vector<char>> &board)
     {
         n = board.size();
         m = sqrt(n);
