@@ -13,16 +13,37 @@ private:
     // todo
     int count(n)
     {
-        int num = n - n / 10;
-        if ()
+        if (!count)
+        {
+            return n
+        }
+        --count;
+        int res = 0;
+        int oldNum = n % 10;
+        n = n / 10;
+        int numCount = 0;
+        int sumCount = 0;
+        while (n)
+        {
+            int num = n % 10;
+            if (num == oldNum)
+            {
+                ++numCount;
+                continue;
+            }
+            else
+            {
+                res = numCount * (sumCount + 1) +
+            }
+        }
     }
 
 public:
     string countAndSay(int n)
     {
-        const count = n;
+        this.count = n;
 
-        return count(n);
+        return count(1);
     }
 };
 // @lc code=end
