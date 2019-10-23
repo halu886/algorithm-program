@@ -10,33 +10,28 @@ class Solution
 public:
     string countAndSay(int n)
     {
-        --n;
-        int res = 1;
-        while (n)
+        if (n == 1)
+            return "1";
+        string strlast = countAndSay(n - 1);
+        int count = 1; //计数
+        string res;    //存放结果
+        for (int i = 0; i < strlast.size(); i++)
         {
-            int tempRes = 0;
-            int numCount = 0;
-            int oldNum = 0;
-            while (res)
+            if (strlast[i] == strlast[i + 1]) //计算有多少个相同数字
             {
-                int num = res % 10;
-                res /= 10;
-                if (num == oldNum)
+                count++;
+                continue;
+            }
+            else
+            {
+                if (strlast[i] != strlast[i + 1])
                 {
-                    ++numCount;
-                    continue;
-                }
-                else
-                {
-                    tempRes += numCount * pow(10, (numCount + 1)) + oldNum * pow(10, numCount);
-                    oldNum = num;
-                    numCount = 1;
+                    res += to_string(count) + strlast[i];
+                    count = 1;
                 }
             }
-            res = tempRes;
-            --n;
         }
-        return to_string(res);
+        return res;
     }
 };
 // @lc code=end
