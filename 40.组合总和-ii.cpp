@@ -12,6 +12,7 @@ private:
     vector<vector<int>> res;
     vector<int> queue;
 
+public:
     void combinationHandler(int index, int target)
     {
         if (target == 0)
@@ -19,24 +20,22 @@ private:
             res.push_back(queue);
             return;
         }
-        for (int i = index + 1; i < ownCandidates.size() && target - ownCandidates[i] >= 0; i++)
+        for (int i = index; i < ownCandidates.size() && target - ownCandidates[i] >= 0; i++)
         {
-            if (i != ownCandidates.size() + 1 && ownCandidates[i] == ownCandidates[i + 1])
-            {
+            if (i > index && ownCandidates[i] == ownCandidates[i - 1])
                 continue;
-            }
             queue.push_back(ownCandidates[i]);
-            combinationHandler(i, target - ownCandidates[i]);
+            // 元素不可重复利用，使用下一个即i+1
+            combinationHandler(i + 1, target - ownCandidates[i]);
             queue.pop_back();
         }
     }
-
-public:
     vector<vector<int>> combinationSum2(vector<int> &candidates, int target)
     {
         std::sort(candidates.begin(), candidates.end());
         this->ownCandidates = candidates;
         combinationHandler(0, target);
+        return res;
     }
 };
 // @lc code=end
