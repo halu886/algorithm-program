@@ -11,30 +11,26 @@ public:
     bool
     isMatch(string s, string p)
     {
-        if (!s.size() && !p.size())
+        if ((!s.size() && !p.size()) || p == "*")
         {
             return true;
         }
+
         if (!s.size() || !p.size())
         {
             return false;
         }
-        if (p[0] == '*')
+
+        if (p[0] == '*' && (isMatch(s.substr(0), p.substr(1)) ||
+                            isMatch(s.substr(1), p.substr(0)) ||
+                            isMatch(s.substr(1), p.substr(1))))
         {
-            for (int i = 0; i < s.size(), i++)
-            {
-                if (isMatch(s.slice(i), p.slice(1)))
-                {
-                    return true;
-                }
-            }
+            return true;
         }
-        else
+
+        if ((s[0] == p[0] || p[0] == '?') && isMatch(s.substr(1), p.substr(1)))
         {
-            if ((s[0] == p[0] || p[0] == '?') && isMatch(s.slice(1), p.slice(1)))
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
