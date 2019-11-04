@@ -33,6 +33,8 @@
         "system_error": "cpp",
         "type_traits": "cpp",
         "unordered_map": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     } // 效果比cpptools要好
 }
