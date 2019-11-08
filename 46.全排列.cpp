@@ -7,34 +7,30 @@
 // @lc code=start
 class Solution
 {
-private:
-    vector<int> &nums;
-    vector<vector<int>> res;
-    vector<int> arr;
-
 public:
-    void permuteArr()
-    {
-        if (arr.size() == nums.size())
-        {
-            arr.push_back(arr);
-            return
-        }
-        for (int i = 0; i < nums.size(); i++)
-        {
-            if (!arr.has(nums[i]))
-            {
-                arr.push_back(nums[i]);
-            }
-            permuteArr();
-            arr.pop_back();
-        }
-    }
     vector<vector<int>> permute(vector<int> &nums)
     {
-        this->nums = nums;
-        permuteArr();
-        return this->res;
+        vector<vector<int>> res;
+        backtrack(nums, res, 0);
+        return res;
+    }
+    void swap(int &a, int &b)
+    {
+        int temp;
+        temp = a;
+        a = b;
+        b = temp;
+    }
+    void backtrack(vector<int> &nums, vector<vector<int>> &res, int i)
+    {
+        if (i == nums.size())
+            res.push_back(nums);
+        for (int j = i; j < nums.size(); j++)
+        {
+            swap(nums[i], nums[j]);
+            backtrack(nums, res, i + 1);
+            swap(nums[i], nums[j]);
+        }
     }
 };
 // @lc code=end
