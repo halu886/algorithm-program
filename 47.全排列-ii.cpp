@@ -8,36 +8,36 @@
 class Solution
 {
 public:
-    void backtrack(vector<int> &nums, int i, vector<vector<int>> &res)
+    vector<int> nums;
+    vector<vector<int>> res;
+    vector<int> path;
+
+    void DFS(int level, vector<bool> &visitor)
     {
-        if (i == nums.size())
+        if (level < 0)
         {
-            res.push_back(nums);
+            res.push_back(path);
             return;
         }
-
-        for (int j = i; j < nums.size(); j++)
+        for (int i = 0; i < nums.size(); i++)
         {
-            if (nums[j] = nums[j + 1])
-            {
+            if (visitor[i] == true || i > 0 && nums[i] == nums[i - 1] && !visitor[i - 1])
                 continue;
-            }
-            swap(nums[i], nums[j]);
-            backtrack(nums, j, res);
-            swap(nums[i], nums[j]);
+            visitor[i] = true;
+            path.push_back(nums[i]);
+            DFS(level - 1, visitor);
+            path.pop_back();
+            visitor[i] = false;
         }
     }
-    void swap(int &a, int &b)
-    {
-        int temp = a;
-        a = b;
-        b = temp;
-    };
+
     vector<vector<int>> permuteUnique(vector<int> &nums)
     {
-        vector<vector<int>> res;
-        std::sort(nums.begin(), nums.end());
-        backtrack(nums, 0, res);
+        sort(nums.begin(), nums.end());
+        vector<bool> visitor(nums.size(), false);
+        this->nums = nums;
+        DFS(nums.size() - 1, visitor);
+
         return res;
     }
 };
