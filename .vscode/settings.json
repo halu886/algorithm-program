@@ -35,6 +35,8 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "string": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "iosfwd": "cpp",
+        "iterator": "cpp"
     } // 效果比cpptools要好
 }
