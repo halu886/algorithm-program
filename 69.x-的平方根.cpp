@@ -10,24 +10,21 @@ class Solution
 public:
     int mySqrt(int x)
     {
-        int middle = x / 2;
-        int mSqrt = middle * middle;
-        int mPreSqrt = (middle - 1) * (middle - 1);
-        int mNextSqrt = (middle + 1) * (middle + 1);
-        while (!(mPreSqrt < x && mNextSqrt > x))
+        //注：在中间过程计算平方的时候可能出现溢出，所以用long long。
+        long long i = 0;
+        long long j = x / 2 + 1; //对于一个非负数n，它的平方根不会大于（n/2+1）
+        while (i <= j)
         {
-            if (mSqrt < x)
-            {
-                middle = middle + (x - middle) / 2;
-            }
+            long long mid = (i + j) / 2;
+            long long res = mid * mid;
+            if (res == x)
+                return mid;
+            else if (res < x)
+                i = mid + 1;
             else
-            {
-                middle /= 2;
-            }
-            int mSqrt = middle * middle;
-            int mPreSqrt = (middle - 1) * (middle - 1);
-            int mNextSqrt = (middle + 1) * (middle + 1);
+                j = mid - 1;
         }
+        return j;
     }
 };
 // @lc code=end
