@@ -10,26 +10,29 @@ class Solution
 public:
     bool searchMatrix(vector<vector<int>> &matrix, int target)
     {
-        int colStartI = 0;
-        int colEndI = matric.size();
-        int rowSize = matric[0].size();
-        int middle = colStartI + (colEndI - colStartI) / 2;
-        vector<int> colEnd = matric[colEnd];
-        vector<int> colStart = matric[colStartI];
-        if (colEnd[colEnd.size() - 1] < target)
-        {
+        int m = matrix.size();
+        if (m == 0)
             return false;
-        }
-        if (colStart[colStart.size() - 1] > target)
+        int n = matrix[0].size();
+
+        // 二分查找
+        int left = 0, right = m * n - 1;
+        int pivotIdx, pivotElement;
+        while (left <= right)
         {
-            return false;
-        }
-        while (colStartI <= colEndI)
-        {
-            if (matric[middle][rowSize])
+            pivotIdx = (left + right) / 2;
+            pivotElement = matrix[pivotIdx / n][pivotIdx % n];
+            if (target == pivotElement)
+                return true;
+            else
             {
+                if (target < pivotElement)
+                    right = pivotIdx - 1;
+                else
+                    left = pivotIdx + 1;
             }
         }
+        return false;
     }
 };
 // @lc code=end
