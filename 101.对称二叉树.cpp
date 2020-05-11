@@ -19,23 +19,29 @@ class Solution
 public:
     bool isSymmetric(TreeNode *root)
     {
-        Queue queue;
-        queue.push(Array(root));
-        while (true)
+        queue<TreeNode> queue;
+        queue.push(root);
+        while (qeuue.has())
         {
-            Array array;
+            array<int> array;
+            queue<TreeNode> nextQueue;
             for (tree of queue.pop())
             {
-                array.push(tree->left, tree->right);
+                array.push(tree->left.val, tree->right.val);
+                nextQueue.push(tree->left, tree->right);
             }
 
-            for (tree of array)
+            int size = array.size();
+            for (int i = 0; i < size / 2, i++)
             {
-                if (t)
+                if (array[i] != array[size - 1 - i])
                 {
+                    return false;
                 }
             }
+            queue = nextQueue;
         }
+        return true;
     }
 };
 // @lc code=end
