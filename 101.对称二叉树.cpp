@@ -19,27 +19,31 @@ class Solution
 public:
     bool isSymmetric(TreeNode *root)
     {
-        queue<TreeNode> queue;
-        queue.push(root);
-        while (qeuue.has())
+        if (!root)
+            return true;
+        queue<TreeNode *> q;
+        q.push(root);
+        while (!q.empty())
         {
-            array<int> array;
-            queue<TreeNode> nextQueue;
-            for (tree of queue.pop())
+            int size = q.size();
+            vector<int> v(size);
+            for (int i = 0; i < size; ++i)
             {
-                array.push(tree->left.val, tree->right.val);
-                nextQueue.push(tree->left, tree->right);
-            }
-
-            int size = array.size();
-            for (int i = 0; i < size / 2, i++)
-            {
-                if (array[i] != array[size - 1 - i])
+                root = q.front();
+                q.pop();
+                v[i] = root ? root->val : INT_MIN;
+                if (root)
                 {
-                    return false;
+                    q.push(root->left);
+                    q.push(root->right);
                 }
             }
-            queue = nextQueue;
+            // 判断是否回文
+            for (int i = 0; i < size / 2; ++i)
+            {
+                if (v[i] != v[size - 1 - i])
+                    return false;
+            }
         }
         return true;
     }
