@@ -17,29 +17,17 @@
 class Solution
 {
 public:
+    bool helper(TreeNode *root, long long lower, long long upper)
+    {
+        if (root == nullptr)
+            return true;
+        if (root->val <= lower || root->val >= upper)
+            return false;
+        return helper(root->left, lower, root->val) && helper(root->right, root->val, upper);
+    }
     bool isValidBST(TreeNode *root)
     {
-        if (!root)
-        {
-            return true;
-        }
-
-        int val = root->val;
-        TreeNode *left = root->left;
-
-        if (!(left && left->val < val && isValidBST(left)))
-        {
-            cout << 'left' + left && left->val;
-            return false;
-        }
-
-        TreeNode *right = root->right;
-        if (!(right && right->val > val && isValidBST(right)))
-        {
-            cout << 'right' + right && right->val;
-            return false;
-        }
-        return true;
+        return helper(root, LONG_MIN, LONG_MAX);
     }
 };
 // @lc code=end
