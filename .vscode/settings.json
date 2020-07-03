@@ -26,6 +26,7 @@
     ],
     "clang.completion.enable": true,
     "files.associations": {
+        "*.heapprofile": "json",
         "*.tpl": "html",
         "istream": "cpp",
         "optional": "cpp",
@@ -39,6 +40,7 @@
         "iosfwd": "cpp",
         "iterator": "cpp",
         "__functional_03": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "ios": "cpp"
     } // 效果比cpptools要好
 }
